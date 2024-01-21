@@ -1,0 +1,6 @@
+Step 1: Go to your search bar and look for Powershell
+Step 2: Right click Powershell then click on Open as Administrator
+Step 3: Go to the current directory where the main.ps1 file is (use cd and dir commands to get to the directory)
+Step 4: type in: .\main.ps1
+
+and thats about it

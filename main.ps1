@@ -14,6 +14,7 @@ echo "Loading Window code.."
 $WindowForm=New-object $FormObject
 $WindowForm.ClientSize='1000,650'
 $WindowForm.Text='Korbyns Tool by: KorbynTalks'
+$windowForm.Icon = [System.Drawing.Icon]::ExtractAssociatedIcon('.\assets\icon.ico')
 $WindowForm.BackColor="gray"
 echo "Finished!"
 ##all Objects.

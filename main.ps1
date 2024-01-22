@@ -69,11 +69,11 @@ $Button5.Font='Font,12'
 $Button5.Location=New-object System.Drawing.Point(350,250)
 
 $Button6=New-object $ButtonObject
-$Button6.Text='Convert PNG to ICO'
+$Button6.Text='ICO Converter'
 $Button6.AutoSize=$true
 $Button6.Font='Font,12'
 $Button6.Location=New-object System.Drawing.Point(350,50)
-$button6.Visible = $false
+$Button6.Visible = $false
 
 $Button7=New-object $ButtonObject
 $Button7.Text='Next Page'
@@ -135,35 +135,6 @@ function OpenCTT{
     pause
     .\scripts-batches\CTTTool.ps1
 }
-function ConvertTo-Icon { 
-    <#
-        .NOTE
-        This function is created by the CTT Team.
-    
-        .DESCRIPTION
-        This function will convert PNG to ICO file
-
-        .EXAMPLE
-        ConvertTo-Icon -bitmapPath "$env:TEMP\cttlogo.png" -iconPath $iconPath
-    #>
-    param( [Parameter(Mandatory=$true)] 
-        $bitmapPath, 
-        $iconPath = "$env:temp\newicon.ico"
-    ) 
-    
-    Add-Type -AssemblyName System.Drawing 
-    
-    if (Test-Path $bitmapPath) { 
-        $b = [System.Drawing.Bitmap]::FromFile($bitmapPath) 
-        $icon = [System.Drawing.Icon]::FromHandle($b.GetHicon()) 
-        $file = New-Object System.IO.FileStream($iconPath, 'OpenOrCreate') 
-        $icon.Save($file) 
-        $file.Close() 
-        $icon.Dispose() 
-        #explorer "/SELECT,$iconpath" 
-    } 
-    else { Write-Warning "$BitmapPath does not exist" } 
-}
 function NxtPge {
     $Button.Visible = $false
     $lblTitleOptimize.Visible = $false
@@ -193,20 +164,17 @@ function LstPge {
 function ExitApp { 
     $windowForm.Close()
 }
-function OpenServInspect {
-    .\scripts-batches\ServiceInspect.ps1
-}
 ##code to run functions from buttons
 $Button.Add_Click({runBloatRemoval})
 $Button2.Add_Click({tempClean})
 $Button3.Add_Click({corruptFixer})
 $Button4.Add_Click({RemovEdge})
 $Button5.Add_Click({OpenCTT})
-$Button6.Add_Click({ConvertTo-Icon})
+$Button6.Add_Click({.\scripts-batches\ICOConvert.ps1})
 $Button7.Add_Click({NxtPge})
 $Button8.Add_Click({LstPge})
 $Button9.Add_Click({ExitApp})
-$Button10.Add_Click({OpenServInspect})
+$Button10.Add_Click({.\scripts-batches\ServiceInspect.ps1})
 echo "Finished!"
 ##display the Form.
 $WindowForm.ShowDialog()
